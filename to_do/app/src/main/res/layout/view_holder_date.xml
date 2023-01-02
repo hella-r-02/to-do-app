@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_date"
+    style="@style/medium_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/date"
+    android:textColor="@color/main_color"
+    android:textSize="12sp"
+    app:layout_constraintTop_toTopOf="parent" />

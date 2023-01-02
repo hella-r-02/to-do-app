@@ -4,4 +4,8 @@
     <string name="zero">0</string>
     <string name="folder">Папка</string>
     <string name="add_folder">Добавить папку</string>
+    <string name="folders">Папки</string>
+    <string name="add_task">Добавить задачу</string>
+    <string name="task">Задание</string>
+    <string name="date">Дата</string>
 </resources>
