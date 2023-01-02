@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_4x"
+    android:background="@color/background">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_folder"
+        android:layout_width="@dimen/space_4x"
+        android:layout_height="@dimen/space_4x"
+        android:src="@drawable/folder_icon"
+        app:layout_constraintBottom_toBottomOf="@id/tv_folder_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_folder_name"
+        app:tint="@color/main_color"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_folder_name"
+        style="@style/medium_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_4x"
+        android:layout_marginEnd="@dimen/space_4x"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/folder"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_count_of_tasks"
+        app:layout_constraintStart_toEndOf="@id/iv_folder"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_count_of_tasks"
+        style="@style/transparent_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zero"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

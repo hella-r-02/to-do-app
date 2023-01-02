@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">todo</string>
+    <string name="list_of_task">Список задач</string>
+    <string name="zero">0</string>
+    <string name="folder">Папка</string>
+    <string name="add_folder">Добавить папку</string>
+</resources>
