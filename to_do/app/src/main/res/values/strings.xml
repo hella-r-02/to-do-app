@@ -8,4 +8,8 @@
     <string name="add_task">Добавить задачу</string>
     <string name="task">Задание</string>
     <string name="date">Дата</string>
+    <string name="tasks">Задачи</string>
+    <string name="add_date">Добавить дату выполнения</string>
+    <string name="repeating">Повтор</string>
+    <string name="add_note">Добавить заметку</string>
 </resources>

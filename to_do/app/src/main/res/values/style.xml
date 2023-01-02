@@ -22,4 +22,10 @@
         <item name="android:fontFamily">@font/ubuntu</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="unselected_option_text">
+        <item name="android:textColor">@color/white_60_per</item>
+        <item name="android:fontFamily">@font/ubuntu</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
