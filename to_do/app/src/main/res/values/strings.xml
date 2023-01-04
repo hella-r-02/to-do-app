@@ -12,4 +12,6 @@
     <string name="add_date">Добавить дату выполнения</string>
     <string name="repeating">Повтор</string>
     <string name="add_note">Добавить заметку</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
 </resources>

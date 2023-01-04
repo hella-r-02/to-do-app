@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListOfTasksFragment">
+    tools:context=".presentation.ListOfTasksFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_top"
@@ -64,6 +64,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/folder"
+        android:layout_marginTop="@dimen/space_4x"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/gl_right"

@@ -1,10 +1,11 @@
-package com.src.todo
+package com.src.todo.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.src.todo.R
 
 class TaskFragment : Fragment() {
     override fun onCreateView(

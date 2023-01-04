@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/item_background"
     android:layout_marginBottom="@dimen/space_2x"
+    android:background="@drawable/item_background"
     android:padding="@dimen/space_5x">
 
     <ImageView
@@ -39,6 +39,7 @@
         android:layout_height="@dimen/space_5x"
         android:layout_marginEnd="@dimen/space_4x"
         android:src="@drawable/repeat_icon"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@id/iv_trash"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white_30_per"
@@ -53,5 +54,33 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tv_task_name,iv_repeating,iv_complete,iv_trash" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_calendar"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="@dimen/space_1x"
+        android:src="@drawable/calendar_icon"
+        app:layout_constraintBottom_toBottomOf="@id/tv_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_date"
+        app:tint="@color/white_60_per" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        style="@style/transparent_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_2x"
+        android:layout_marginTop="@dimen/space_4x"
+        android:text="@string/date"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/iv_calendar"
+        app:layout_constraintTop_toBottomOf="@id/barrier_task" />
 </androidx.constraintlayout.widget.ConstraintLayout>
