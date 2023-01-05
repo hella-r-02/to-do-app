@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class ListOfFoldersViewModel(private val getListOfFoldersWithCountTasksUseCase: GetListOfFoldersWithCountTasksUseCase) :
     ViewModel() {
     private val _mutableLiveDataFolders = MutableLiveData<List<FolderWithCountOfTasks>>(emptyList())
-    val liveDataMovies get() = _mutableLiveDataFolders
+    val liveDataFolders get() = _mutableLiveDataFolders
 
     fun getFolders() {
         viewModelScope.launch {

@@ -8,5 +8,5 @@ data class Task(
     val date: Date?,
     val note: String?,
     val repeating: Long?,
-    val folder: Folder
+    val folderId: Long
 )

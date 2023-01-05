@@ -45,7 +45,7 @@ data class TaskEntity(
             date = task.date,
             note = task.note,
             repeating = task.repeating,
-            folderId = task.folder.id
+            folderId = task.folderId
         )
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listOfFoldersFragment">
+
+    <fragment
+        android:id="@+id/listOfFoldersFragment"
+        android:name="com.src.todo.presentation.listOfFolders.ListOfFoldersFragment"
+        android:label="fragment_list_of_folders"
+        tools:layout="@layout/fragment_list_of_folders">
+        <action
+            android:id="@+id/action_listOfFoldersFragment_to_listOfTasksFragment"
+            app:destination="@id/listOfTasksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfTasksFragment"
+        android:name="com.src.todo.presentation.listOfTask.ListOfTasksFragment"
+        android:label="fragment_list_of_tasks"
+        tools:layout="@layout/fragment_list_of_tasks" />
+</navigation>

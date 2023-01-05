@@ -1,8 +1,10 @@
 package com.src.todo.data.local
 
 import com.src.todo.data.local.entity.FolderEntity
+import com.src.todo.data.local.entity.TaskEntity
 import com.src.todo.data.local.entity.views.FolderWithCountOfTasksView
 import com.src.todo.domain.model.FolderWithCountOfTasks
+import com.src.todo.domain.model.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,11 +20,28 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
             .map { list -> list.map { mapFoldersWithCountOfTasksViewToModel(it) } }
     }
 
+    override fun getTasksByFolderId(folderId: Long): Flow<List<Task>> {
+        return database.getTaskDao().getTasksByFolderId(folderId)
+            .map { list -> list.map { mapTaskEntityToModel(it) } }
+    }
+
     private suspend fun mapFoldersWithCountOfTasksViewToModel(folderWithCountOfTasksView: FolderWithCountOfTasksView): FolderWithCountOfTasks =
         withContext(Dispatchers.IO) {
             return@withContext FolderWithCountOfTasks(
                 folder = folderWithCountOfTasksView.folder.toFolder(),
                 count = folderWithCountOfTasksView.taskCount
+            )
+        }
+
+    private suspend fun mapTaskEntityToModel(taskEntity: TaskEntity): Task =
+        withContext(Dispatchers.IO) {
+            return@withContext Task(
+                id = taskEntity.id,
+                name = taskEntity.name,
+                date = taskEntity.date,
+                note = taskEntity.note,
+                repeating = taskEntity.repeating,
+                folderId = taskEntity.folderId
             )
         }
 }

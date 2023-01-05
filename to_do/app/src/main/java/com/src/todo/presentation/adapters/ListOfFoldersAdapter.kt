@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.src.todo.databinding.ViewHolderFolderBinding
 import com.src.todo.domain.model.FolderWithCountOfTasks
 
-class ListOfFoldersAdapter :
+class ListOfFoldersAdapter(private val onClickFolder: (item: Long, name: String) -> Unit) :
     ListAdapter<FolderWithCountOfTasks, ListOfFoldersAdapter.DataViewHolder>(
         ListOfFoldersDiffCallback()
     ) {
@@ -18,9 +18,15 @@ class ListOfFoldersAdapter :
     class DataViewHolder(private val binding: ViewHolderFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SimpleDateFormat")
-        fun onBind(folderWithCountOfTasks: FolderWithCountOfTasks) {
+        fun onBind(
+            folderWithCountOfTasks: FolderWithCountOfTasks,
+            onClickFolder: (item: Long,name:String) -> Unit
+        ) {
             binding.tvCountOfTasks.text = folderWithCountOfTasks.count.toString()
             binding.tvFolderName.text = folderWithCountOfTasks.folder.name
+            itemView.setOnClickListener {
+                onClickFolder(folderWithCountOfTasks.folder.id, folderWithCountOfTasks.folder.name)
+            }
         }
 
         private val RecyclerView.ViewHolder.context
@@ -38,7 +44,7 @@ class ListOfFoldersAdapter :
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val item = getItem(position)
-        holder.onBind(item)
+        holder.onBind(item, onClickFolder)
     }
 }
 
