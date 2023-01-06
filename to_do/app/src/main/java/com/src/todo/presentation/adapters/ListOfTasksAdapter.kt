@@ -14,6 +14,7 @@ import com.src.todo.R
 import com.src.todo.databinding.ViewHolderDateBinding
 import com.src.todo.databinding.ViewHolderTaskBinding
 import com.src.todo.domain.model.TaskWithDate
+import com.src.todo.presentation.utils.ConvectorDateToString
 import com.src.todo.presentation.utils.SHORT_DATE_FORMAT
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,7 +60,7 @@ class ListOfTasksAdapter :
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
         private fun onBindDate(dateTask: TaskWithDate.DateTask) {
             val bindingDate = binding as ViewHolderDateBinding
-            bindingDate.tvDate.text = dateTask.date
+            bindingDate.tvDate.text = ConvectorDateToString().convectDateToString(dateTask.date,itemView.context)
         }
 
         fun onBind(taskWithDate: TaskWithDate) {

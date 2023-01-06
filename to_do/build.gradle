@@ -1,7 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext.nav_version = "2.5.3"
+    ext.dagger_version = "2.41"
+    ext.view_model_version="2.5.1"
+    ext.room_version = "2.2.6"
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-serialization:1.4.20"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 plugins {

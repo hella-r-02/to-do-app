@@ -15,7 +15,6 @@ import com.src.todo.domain.model.FolderWithCountOfTasks
 import com.src.todo.presentation.MainActivity
 import com.src.todo.presentation.adapters.ListOfFoldersAdapter
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
-import com.src.todo.presentation.listOfTask.ListOfTasksFragment
 
 class ListOfFoldersFragment : Fragment() {
     private lateinit var binding: FragmentListOfFoldersBinding
@@ -54,9 +53,11 @@ class ListOfFoldersFragment : Fragment() {
     }
 
     private fun openFolder(id: Long, name: String) {
-        findNavController().navigate(
-            R.id.action_listOfFoldersFragment_to_listOfTasksFragment,
-            bundleOf(ListOfTasksFragment.ARG_ID to id, ListOfTasksFragment.ARG_NAME_FOLDER to name)
-        )
+        val direction =
+            ListOfFoldersFragmentDirections.actionListOfFoldersFragmentToListOfTasksFragment(
+                id,
+                name
+            )
+        findNavController().navigate(direction)
     }
 }

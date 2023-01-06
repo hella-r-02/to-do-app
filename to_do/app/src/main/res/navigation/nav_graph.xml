@@ -18,5 +18,12 @@
         android:id="@+id/listOfTasksFragment"
         android:name="com.src.todo.presentation.listOfTask.ListOfTasksFragment"
         android:label="fragment_list_of_tasks"
-        tools:layout="@layout/fragment_list_of_tasks" />
+        tools:layout="@layout/fragment_list_of_tasks" >
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+        <argument
+            android:name="folder_name"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import com.src.todo.App
 import com.src.todo.R
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
@@ -27,11 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         (applicationContext as App).appComponent.inject(this)
         setContentView(R.layout.activity_main)
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHost.navController
-
-        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

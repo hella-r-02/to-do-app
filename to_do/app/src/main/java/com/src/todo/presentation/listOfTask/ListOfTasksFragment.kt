@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.src.todo.databinding.FragmentListOfTasksBinding
@@ -16,6 +18,7 @@ import com.src.todo.presentation.listOfTask.viewModel.ListOfTasksViewModel
 class ListOfTasksFragment : Fragment() {
     private lateinit var binding: FragmentListOfTasksBinding
     private lateinit var viewModel: ListOfTasksViewModel
+    private val args: ListOfTasksFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +31,11 @@ class ListOfTasksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = requireArguments().getLong(ARG_ID)
-        val name = requireArguments().getString(ARG_NAME_FOLDER)
+        val id = args.folderId
+        val name = args.folderName
         viewModel.liveDataTasks.observe(viewLifecycleOwner, this::getListOfTasks)
-        binding.tvFolderName.text = name.toString()
+        binding.tvFolderName.text = name
+        setOnClickListenerForBackButton()
         viewModel.getTasks(id)
     }
 
@@ -48,8 +52,9 @@ class ListOfTasksFragment : Fragment() {
         binding.rvTasks.adapter = adapter
     }
 
-    companion object {
-        const val ARG_ID = "id"
-        const val ARG_NAME_FOLDER = "name_folder"
+    private fun setOnClickListenerForBackButton() {
+        binding.clButtonBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }

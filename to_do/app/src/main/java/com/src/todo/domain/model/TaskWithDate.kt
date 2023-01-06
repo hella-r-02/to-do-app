@@ -13,12 +13,12 @@ sealed class TaskWithDate {
     ) : TaskWithDate()
 
     class DateTask(
-        val date: String
+        val date:Date?
     ) : TaskWithDate()
 
     companion object {
         fun convertTaskToTaskWithDate(task: com.src.todo.domain.model.Task): TaskWithDate =
-            TaskWithDate.Task(
+            Task(
                 id = task.id,
                 name = task.name,
                 note = task.note,
