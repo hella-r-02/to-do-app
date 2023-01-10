@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".presentation.TaskFragment">
+    tools:context=".presentation.task.TaskFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_top"
@@ -80,12 +80,30 @@
         app:layout_constraintTop_toBottomOf="@id/cl_button_back"
         app:layout_goneMarginStart="@dimen/space_2x" />
 
+    <EditText
+        android:id="@+id/et_task_name"
+        style="@style/main_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_4x"
+        android:layout_marginTop="@dimen/space_5x"
+        android:background="@android:color/transparent"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:text="@string/task"
+        android:textColorHint="@color/white_60_per"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/iv_complete"
+        app:layout_constraintTop_toBottomOf="@id/cl_button_back"
+        app:layout_goneMarginStart="@dimen/space_2x" />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tv_task_name,iv_complete" />
+        app:constraint_referenced_ids="tv_task_name,iv_complete,et_task_name" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_calendar"
@@ -105,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_4x"
         android:layout_marginTop="@dimen/space_5x"
-        android:text="@string/add_date"
+        android:text="@string/indefinitely"
         app:layout_constraintStart_toEndOf="@id/iv_calendar"
         app:layout_constraintTop_toBottomOf="@id/barrier_task"
         app:layout_goneMarginStart="@dimen/space_2x" />
@@ -116,36 +134,6 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="tv_date,iv_calendar" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_repeating"
-        android:layout_width="@dimen/space_5x"
-        android:layout_height="@dimen/space_5x"
-        android:src="@drawable/repeat_icon"
-        app:layout_constraintBottom_toBottomOf="@id/tv_repeating"
-        app:layout_constraintStart_toEndOf="@id/gl_left"
-        app:layout_constraintTop_toTopOf="@id/tv_repeating"
-        app:tint="@color/white_60_per"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/tv_repeating"
-        style="@style/unselected_option_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_4x"
-        android:layout_marginTop="@dimen/space_5x"
-        android:text="@string/repeating"
-        app:layout_constraintStart_toEndOf="@id/iv_repeating"
-        app:layout_constraintTop_toBottomOf="@id/barrier_date"
-        app:layout_goneMarginStart="@dimen/space_2x" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier_repeating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tv_repeating,iv_repeating" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_pen"
@@ -165,9 +153,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_4x"
         android:layout_marginTop="@dimen/space_5x"
-        android:text="@string/add_note"
+        android:text="@string/no_note"
         app:layout_constraintStart_toEndOf="@id/iv_pen"
-        app:layout_constraintTop_toBottomOf="@id/barrier_repeating"
+        app:layout_constraintTop_toBottomOf="@id/barrier_date"
         app:layout_goneMarginStart="@dimen/space_2x" />
 
     <ImageView

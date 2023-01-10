@@ -1,4 +1,4 @@
-package com.src.todo.data
+package com.src.todo.data.repository
 
 import com.src.todo.data.local.LocalDataSource
 import com.src.todo.domain.model.FolderWithCountOfTasks

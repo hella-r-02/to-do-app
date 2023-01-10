@@ -29,21 +29,9 @@
         android:text="@string/task"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_complete"
-        app:layout_constraintEnd_toStartOf="@id/iv_repeating"
+        app:layout_constraintEnd_toStartOf="@id/iv_trash"
         app:layout_constraintStart_toEndOf="@id/iv_complete"
         app:layout_constraintTop_toTopOf="@id/iv_complete" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_repeating"
-        android:layout_width="@dimen/space_5x"
-        android:layout_height="@dimen/space_5x"
-        android:layout_marginEnd="@dimen/space_4x"
-        android:src="@drawable/repeat_icon"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@id/iv_trash"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white_30_per"
-        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/iv_trash"
@@ -59,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tv_task_name,iv_repeating,iv_complete,iv_trash" />
+        app:constraint_referenced_ids="tv_task_name,iv_complete,iv_trash" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_calendar"

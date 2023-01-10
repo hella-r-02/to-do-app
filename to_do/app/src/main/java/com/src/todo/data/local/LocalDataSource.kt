@@ -9,4 +9,6 @@ interface LocalDataSource {
     fun insertFolder(name: String)
     fun getFoldersWithCountOfTasks(): Flow<List<FolderWithCountOfTasks>>
     fun getTasksByFolderId(folderId: Long): Flow<List<Task>>
+    fun getTaskById(taskId: Long): Flow<Task>
+    fun updateTask(task: Task)
 }

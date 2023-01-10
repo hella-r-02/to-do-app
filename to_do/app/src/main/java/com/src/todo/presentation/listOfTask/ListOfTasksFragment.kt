@@ -1,6 +1,7 @@
 package com.src.todo.presentation.listOfTask
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.src.todo.domain.model.TaskWithDate
 import com.src.todo.presentation.MainActivity
 import com.src.todo.presentation.adapters.ListOfTasksAdapter
 import com.src.todo.presentation.listOfTask.viewModel.ListOfTasksViewModel
+import com.src.todo.presentation.utils.State
 
 class ListOfTasksFragment : Fragment() {
     private lateinit var binding: FragmentListOfTasksBinding
@@ -33,28 +35,49 @@ class ListOfTasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = args.folderId
         val name = args.folderName
-        viewModel.liveDataTasks.observe(viewLifecycleOwner, this::getListOfTasks)
+        viewModel.liveDataLoadTasksState.observe(viewLifecycleOwner, this::parseState)
         binding.tvFolderName.text = name
         setOnClickListenerForBackButton()
         viewModel.getTasks(id)
     }
 
-    private fun getListOfTasks(tasks: List<TaskWithDate>) {
+    private fun parseState(state: State<List<TaskWithDate>>) {
+        when (state) {
+            is State.LoadingState -> {
+                Log.d("Fragment", "Load")
+            }
+            is State.SuccessState -> {
+                setData(state.data)
+            }
+            else -> {}
+        }
+    }
+
+    private fun setData(tasks: List<TaskWithDate>?) {
         setAdapterForTasks(tasks)
     }
 
-    private fun setAdapterForTasks(tasksWithDate: List<TaskWithDate>) {
-        val adapter = ListOfTasksAdapter()
-        adapter.submitList(tasksWithDate)
-        adapter.setData(tasksWithDate)
-        val layoutInflater = GridLayoutManager(requireContext(), 1, RecyclerView.VERTICAL, false)
-        binding.rvTasks.layoutManager = layoutInflater
-        binding.rvTasks.adapter = adapter
+    private fun setAdapterForTasks(tasksWithDate: List<TaskWithDate>?) {
+        if (tasksWithDate != null) {
+            val adapter = ListOfTasksAdapter { id -> setOnClickListenerForTask(id) }
+            adapter.submitList(tasksWithDate)
+            adapter.setData(tasksWithDate)
+            val layoutInflater =
+                GridLayoutManager(requireContext(), 1, RecyclerView.VERTICAL, false)
+            binding.rvTasks.layoutManager = layoutInflater
+            binding.rvTasks.adapter = adapter
+        }
     }
 
     private fun setOnClickListenerForBackButton() {
         binding.clButtonBack.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun setOnClickListenerForTask(taskId: Long) {
+        val direction =
+            ListOfTasksFragmentDirections.actionListOfTasksFragmentToTaskFragment(taskId)
+        findNavController().navigate(direction)
     }
 }

@@ -1,4 +1,4 @@
-package com.src.todo.data
+package com.src.todo.data.repository
 
 import com.src.todo.data.local.LocalDataSource
 import com.src.todo.domain.model.Task
@@ -12,4 +12,12 @@ class TaskRepositoryImpl(private val localDataSource: LocalDataSource) : TaskRep
         withContext(Dispatchers.IO) {
             return@withContext localDataSource.getTasksByFolderId(folderId)
         }
+
+    override suspend fun getTaskById(taskId: Long): Flow<Task> = withContext(Dispatchers.IO) {
+        return@withContext localDataSource.getTaskById(taskId)
+    }
+
+    override suspend fun updateTask(task: Task) = withContext(Dispatchers.IO) {
+        localDataSource.updateTask(task)
+    }
 }

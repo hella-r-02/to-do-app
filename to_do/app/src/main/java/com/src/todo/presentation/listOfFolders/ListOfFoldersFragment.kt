@@ -1,20 +1,20 @@
 package com.src.todo.presentation.listOfFolders
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.src.todo.R
 import com.src.todo.databinding.FragmentListOfFoldersBinding
 import com.src.todo.domain.model.FolderWithCountOfTasks
 import com.src.todo.presentation.MainActivity
 import com.src.todo.presentation.adapters.ListOfFoldersAdapter
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
+import com.src.todo.presentation.utils.State
 
 class ListOfFoldersFragment : Fragment() {
     private lateinit var binding: FragmentListOfFoldersBinding
@@ -31,11 +31,23 @@ class ListOfFoldersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.liveDataFolders.observe(viewLifecycleOwner, this::getFolders)
+        viewModel.liveDataLoadFoldersState.observe(viewLifecycleOwner, this::parseState)
         viewModel.getFolders()
     }
 
-    private fun getFolders(folders: List<FolderWithCountOfTasks>) {
+    private fun parseState(state: State<List<FolderWithCountOfTasks>>) {
+        when (state) {
+            is State.LoadingState -> {
+                Log.d("Fragment", "Load")
+            }
+            is State.SuccessState -> {
+                loadData(state.data)
+            }
+            else -> {}
+        }
+    }
+
+    private fun loadData(folders: List<FolderWithCountOfTasks>) {
         setDataForListOfFoldersAdapter(folders)
         var countOfTasks: Long = 0
         folders.forEach {

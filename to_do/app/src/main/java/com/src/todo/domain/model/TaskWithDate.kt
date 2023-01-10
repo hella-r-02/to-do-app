@@ -8,22 +8,20 @@ sealed class TaskWithDate {
         val name: String,
         val date: Date?,
         val note: String?,
-        val repeating: Long?,
         val folderId: Long
     ) : TaskWithDate()
 
     class DateTask(
-        val date:Date?
+        val date: Date?
     ) : TaskWithDate()
 
     companion object {
-        fun convertTaskToTaskWithDate(task: com.src.todo.domain.model.Task): TaskWithDate =
+        fun convertTaskModelToTaskWithDateTaskModel(task: com.src.todo.domain.model.Task): TaskWithDate =
             Task(
                 id = task.id,
                 name = task.name,
                 note = task.note,
                 date = task.date,
-                repeating = task.repeating,
                 folderId = task.folderId
             )
     }

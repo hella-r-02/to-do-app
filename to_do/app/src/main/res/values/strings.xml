@@ -15,4 +15,14 @@
     <string name="today">Сегодня</string>
     <string name="tomorrow">Завтра</string>
     <string name="indefinitely">Бессрочно</string>
+    <string name="daily">Ежедневно</string>
+    <string name="weekly">Еженедельно</string>
+    <string name="monthly">Ежемесячно</string>
+    <string name="annually">Ежегодно</string>
+    <string name="to_configure">Настроить</string>
+    <string name="day">дн.</string>
+    <string name="week">нед.</string>
+    <string name="year">г.</string>
+    <string name="no_note">Заметок нет</string>
+    <string name="name">Название</string>
 </resources>

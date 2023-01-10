@@ -19,7 +19,7 @@ import com.src.todo.presentation.utils.SHORT_DATE_FORMAT
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ListOfTasksAdapter :
+class ListOfTasksAdapter(private val onClickTask: (taskId: Long) -> Unit) :
     ListAdapter<TaskWithDate, ListOfTasksAdapter.DataViewHolder>(TaskWithDateDiffCallback()) {
     private lateinit var binding: ViewBinding
     private val adapterData = mutableListOf<TaskWithDate>()
@@ -27,12 +27,9 @@ class ListOfTasksAdapter :
     class DataViewHolder(private val binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SimpleDateFormat")
-        private fun onBindTask(task: TaskWithDate.Task) {
+        private fun onBindTask(task: TaskWithDate.Task, onClickTask: (taskId: Long) -> Unit) {
             val bindingTask = binding as ViewHolderTaskBinding
             bindingTask.tvTaskName.text = task.name
-            if (task.repeating === null) {
-                bindingTask.ivRepeating.visibility = View.GONE
-            }
             if (task.date == null) {
                 bindingTask.ivCalendar.visibility = View.GONE
                 bindingTask.tvDate.visibility = View.GONE
@@ -55,17 +52,21 @@ class ListOfTasksAdapter :
                 bindingTask.tvDate.setTextColor(ContextCompat.getColor(context, colorId))
                 bindingTask.tvDate.text = SimpleDateFormat(SHORT_DATE_FORMAT).format(task.date)
             }
+           itemView.setOnClickListener {
+               onClickTask(task.id)
+           }
         }
 
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
         private fun onBindDate(dateTask: TaskWithDate.DateTask) {
             val bindingDate = binding as ViewHolderDateBinding
-            bindingDate.tvDate.text = ConvectorDateToString().convectDateToString(dateTask.date,itemView.context)
+            bindingDate.tvDate.text =
+                ConvectorDateToString().convectDateToString(dateTask.date, itemView.context)
         }
 
-        fun onBind(taskWithDate: TaskWithDate) {
+        fun onBind(taskWithDate: TaskWithDate, onClickTask: (taskId: Long) -> Unit) {
             when (taskWithDate) {
-                is TaskWithDate.Task -> onBindTask(taskWithDate)
+                is TaskWithDate.Task -> onBindTask(taskWithDate, onClickTask)
                 is TaskWithDate.DateTask -> onBindDate(taskWithDate)
             }
         }
@@ -103,7 +104,7 @@ class ListOfTasksAdapter :
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val item = getItem(position)
-        holder.onBind(item)
+        holder.onBind(item, onClickTask)
     }
 
     fun setData(data: List<TaskWithDate>) {

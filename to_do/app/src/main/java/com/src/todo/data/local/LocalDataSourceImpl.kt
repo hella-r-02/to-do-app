@@ -25,6 +25,15 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
             .map { list -> list.map { mapTaskEntityToModel(it) } }
     }
 
+    override fun getTaskById(taskId: Long): Flow<Task> {
+        return database.getTaskDao().getTaskById(taskId).map { mapTaskEntityToModel(it) }
+    }
+
+    override fun updateTask(task: Task) {
+        val taskEntity = TaskEntity.fromTaskModel(task)
+        database.getTaskDao().updateTask(taskEntity)
+    }
+
     private suspend fun mapFoldersWithCountOfTasksViewToModel(folderWithCountOfTasksView: FolderWithCountOfTasksView): FolderWithCountOfTasks =
         withContext(Dispatchers.IO) {
             return@withContext FolderWithCountOfTasks(
@@ -40,8 +49,7 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
                 name = taskEntity.name,
                 date = taskEntity.date,
                 note = taskEntity.note,
-                repeating = taskEntity.repeating,
-                folderId = taskEntity.folderId
+                folderId = taskEntity.folderId,
             )
         }
 }

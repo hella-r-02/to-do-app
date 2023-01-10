@@ -2,7 +2,7 @@ package com.src.todo.presentation.listOfFolders.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.src.todo.domain.usecase.GetListOfFoldersWithCountTasksUseCase
+import com.src.todo.domain.usecase.folder.GetListOfFoldersWithCountTasksUseCase
 import javax.inject.Inject
 
 class ListOfFoldersViewModelFactory @Inject constructor(private val getListOfFoldersWithCountTasksUseCase: GetListOfFoldersWithCountTasksUseCase) :

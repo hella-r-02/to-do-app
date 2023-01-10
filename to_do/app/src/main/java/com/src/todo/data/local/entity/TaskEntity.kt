@@ -32,11 +32,8 @@ data class TaskEntity(
     @ColumnInfo(name = "note")
     val note: String?,
 
-    @ColumnInfo(name = "repeating")
-    val repeating: Long?,
-
     @ColumnInfo(name = "folder_id")
-    val folderId: Long
+    val folderId: Long,
 ) {
     companion object {
         fun fromTaskModel(task: Task) = TaskEntity(
@@ -44,7 +41,6 @@ data class TaskEntity(
             name = task.name,
             date = task.date,
             note = task.note,
-            repeating = task.repeating,
             folderId = task.folderId
         )
     }
