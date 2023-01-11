@@ -4,8 +4,8 @@ import java.util.*
 
 data class Task(
     val id: Long,
-    val name: String,
-    val date: Date?,
+    var name: String,
+    var date: Date?,
     val note: String?,
     val folderId: Long,
 )

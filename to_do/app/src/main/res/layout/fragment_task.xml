@@ -62,9 +62,8 @@
         android:layout_width="@dimen/space_5x"
         android:layout_height="@dimen/space_5x"
         android:background="@drawable/task_unfulfilled_background"
-        app:layout_constraintBottom_toBottomOf="@id/tv_task_name"
+        app:layout_constraintBottom_toBottomOf="@id/barrier_task"
         app:layout_constraintStart_toEndOf="@id/gl_left"
-        app:layout_constraintTop_toTopOf="@id/tv_task_name"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -76,6 +75,7 @@
         android:layout_marginTop="@dimen/space_5x"
         android:text="@string/task"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/iv_complete"
         app:layout_constraintTop_toBottomOf="@id/cl_button_back"
         app:layout_goneMarginStart="@dimen/space_2x" />
@@ -90,20 +90,19 @@
         android:background="@android:color/transparent"
         android:hint="@string/name"
         android:inputType="text"
-        android:text="@string/task"
         android:textColorHint="@color/white_60_per"
         android:textSize="16sp"
-        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/iv_complete"
         app:layout_constraintTop_toBottomOf="@id/cl_button_back"
-        app:layout_goneMarginStart="@dimen/space_2x" />
+        app:layout_goneMarginStart="@dimen/space_2x"
+        tools:ignore="TextViewEdits" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tv_task_name,iv_complete,et_task_name" />
+        app:constraint_referenced_ids="tv_task_name,et_task_name" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_calendar"

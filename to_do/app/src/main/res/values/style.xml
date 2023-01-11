@@ -22,4 +22,24 @@
         <item name="android:fontFamily">@font/ubuntu</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="custom_bottom_sheet_dialog_theme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/custom_bottom_sheet_style</item>
+    </style>
+
+    <style name="custom_bottom_sheet_style" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <style name="calendar_view_custom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/main_color</item>
+        <item name="colorPrimary">@color/white</item>
+    </style>
+
+    <style name="calendar_view_date_custom_text" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:weekNumberColor">@color/main_color</item>
+    </style>
+
+    <style name="calendar_view_week_custom_text" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

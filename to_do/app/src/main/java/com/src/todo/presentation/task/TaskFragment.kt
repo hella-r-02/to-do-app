@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -13,13 +14,21 @@ import com.src.todo.R
 import com.src.todo.databinding.FragmentTaskBinding
 import com.src.todo.domain.model.Task
 import com.src.todo.presentation.MainActivity
+import com.src.todo.presentation.dialog.CalendarBottomSheetDialogFragment
+import com.src.todo.presentation.dialog.DateBottomSheetDialogFragment
+import com.src.todo.presentation.dialog.DialogEnum
 import com.src.todo.presentation.task.viewModel.TaskViewModel
 import com.src.todo.presentation.utils.ConvectorDateToString
 import com.src.todo.presentation.utils.State
+import java.util.*
+
 
 class TaskFragment : Fragment() {
     private lateinit var binging: FragmentTaskBinding
     private lateinit var viewModel: TaskViewModel
+    private lateinit var task: Task
+    private lateinit var dateDialog: DateBottomSheetDialogFragment
+    private lateinit var calendarDialog: CalendarBottomSheetDialogFragment
     private val args: TaskFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +45,8 @@ class TaskFragment : Fragment() {
         val id = args.taskId
         viewModel.getTask(id)
         setOnClickListenerForBackButton()
+        setOnFocusChangeListener()
+        showDateDialog()
     }
 
     private fun parseState(state: State<Task>) {
@@ -51,7 +62,9 @@ class TaskFragment : Fragment() {
     }
 
     private fun setData(task: Task) {
+        this.task = task
         binging.tvTaskName.text = task.name
+        binging.etTaskName.setText(task.name)
         with(binging.tvDate) {
             if (task.date != null) {
                 text = ConvectorDateToString().convectDateToString(task.date, requireContext())
@@ -76,5 +89,69 @@ class TaskFragment : Fragment() {
         binging.clButtonBack.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun setOnFocusChangeListener() {
+        binging.etTaskName.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                binging.etTaskName.clearFocus()
+                if (binging.etTaskName.text.toString().isNotEmpty()) {
+                    task.name = binging.etTaskName.text.toString()
+                    viewModel.updateTask(task)
+                }
+                return@setOnEditorActionListener false
+            } else {
+                return@setOnEditorActionListener true
+            }
+        }
+    }
+
+    private fun setOnClickListenerForBackButtonForCalendarDialog() {
+        calendarDialog.dismiss()
+        dateDialog.show(parentFragmentManager, DATE_DIALOG)
+    }
+
+    private fun showDateDialog() {
+        binging.tvDate.setOnClickListener {
+            dateDialog = DateBottomSheetDialogFragment({ date, dialogType ->
+                setDateForTask(
+                    date,
+                    dialogType
+                )
+            },
+                { showCalendarDialog() }
+            )
+            dateDialog.show(parentFragmentManager, DATE_DIALOG)
+        }
+    }
+
+    private fun setDateForTask(date: Date, dialogType: DialogEnum) {
+        task.date = date
+        with(binging.tvDate) {
+            text = ConvectorDateToString().convectDateToString(task.date, requireContext())
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+        viewModel.updateTask(task)
+        if (dialogType == DialogEnum.DATE) {
+            dateDialog.dismiss()
+        } else {
+            calendarDialog.dismiss()
+        }
+    }
+
+    private fun showCalendarDialog() {
+        calendarDialog = CalendarBottomSheetDialogFragment({ date, dialogType ->
+            setDateForTask(
+                date,
+                dialogType
+            )
+        }, { setOnClickListenerForBackButtonForCalendarDialog() })
+        dateDialog.dismiss()
+        calendarDialog.show(parentFragmentManager, CALENDAR_DIALOG)
+    }
+
+    companion object {
+        const val DATE_DIALOG = "date_dialog"
+        const val CALENDAR_DIALOG = "calendar_dialog"
     }
 }

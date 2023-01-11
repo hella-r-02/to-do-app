@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    tools:context=".presentation.dialog.DateBottomSheetDialogFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/space_5x" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/space_5x" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/space_5x" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_today"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/gl_top">
+
+        <ImageView
+            android:id="@+id/iv_today"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_5x"
+            android:text="@string/today"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_today"
+            app:layout_constraintStart_toEndOf="@id/iv_today"
+            app:layout_constraintTop_toTopOf="@id/iv_today" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_today_day_of_week"
+        style="@style/unselected_option_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Пн"
+        app:layout_constraintBottom_toBottomOf="@id/cl_today"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintTop_toTopOf="@id/cl_today" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_tomorrow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_4x"
+        app:layout_constraintStart_toEndOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/cl_today">
+
+        <ImageView
+            android:id="@+id/iv_tomorrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_5x"
+            android:text="@string/tomorrow"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_tomorrow"
+            app:layout_constraintStart_toEndOf="@id/iv_tomorrow"
+            app:layout_constraintTop_toTopOf="@id/iv_tomorrow" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_select_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_4x"
+        app:layout_constraintStart_toEndOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/cl_tomorrow">
+
+        <ImageView
+            android:id="@+id/iv_select_date"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_5x"
+            android:text="@string/select_date"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_select_date"
+            app:layout_constraintStart_toEndOf="@id/iv_select_date"
+            app:layout_constraintTop_toTopOf="@id/iv_select_date" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_tomorrow_day_of_week"
+        style="@style/unselected_option_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Пн"
+        app:layout_constraintBottom_toBottomOf="@id/cl_tomorrow"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintTop_toTopOf="@id/cl_tomorrow" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/cl_select_date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

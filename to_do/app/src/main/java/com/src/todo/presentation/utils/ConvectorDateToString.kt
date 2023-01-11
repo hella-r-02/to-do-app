@@ -20,16 +20,15 @@ class ConvectorDateToString {
                 calendar.get(Calendar.MONTH) == now.get(Calendar.MONTH)
             ) {
                 val dateString = SimpleDateFormat(DATE_FORMAT).format(date)
-
                 return "${context.getString(R.string.today)}, $dateString"
             }
-            calendar.add(Calendar.DAY_OF_MONTH, 1)
+            now.add(Calendar.DATE, 1)
             if (calendar.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH) &&
                 calendar.get(Calendar.MONTH) == now.get(Calendar.MONTH)
             ) {
                 val dateString = SimpleDateFormat(DATE_FORMAT).format(date)
 
-                return "${context.getString(R.string.tomorrow)} $dateString"
+                return "${context.getString(R.string.tomorrow)}, $dateString"
             }
             return SimpleDateFormat(DATE_FORMAT).format(date)
         }
