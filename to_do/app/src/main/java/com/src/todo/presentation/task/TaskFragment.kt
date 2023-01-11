@@ -47,6 +47,8 @@ class TaskFragment : Fragment() {
         setOnClickListenerForBackButton()
         setOnFocusChangeListener()
         showDateDialog()
+        setOnClickListenerForRemoveNoteIcon()
+        setOnClickListenerForRemoveDateIcon()
     }
 
     private fun parseState(state: State<Task>) {
@@ -69,20 +71,25 @@ class TaskFragment : Fragment() {
             if (task.date != null) {
                 text = ConvectorDateToString().convectDateToString(task.date, requireContext())
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                binging.ivRemoveDate.visibility = View.VISIBLE
             } else {
                 text = getString(R.string.indefinitely)
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.white_60_per))
+                binging.ivRemoveDate.visibility = View.GONE
             }
         }
         with(binging.tvNote) {
-            if (task.note != null) {
+            if (task.note != null && task.note!!.isNotEmpty()) {
                 text = task.note
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                binging.ivRemoveNote.visibility = View.VISIBLE
             } else {
                 text = getString(R.string.no_note)
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.white_60_per))
+                binging.ivRemoveNote.visibility = View.GONE
             }
         }
+        setOnClickListenerForNoteButton()
     }
 
     private fun setOnClickListenerForBackButton() {
@@ -130,6 +137,7 @@ class TaskFragment : Fragment() {
         with(binging.tvDate) {
             text = ConvectorDateToString().convectDateToString(task.date, requireContext())
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binging.ivRemoveDate.visibility = View.VISIBLE
         }
         viewModel.updateTask(task)
         if (dialogType == DialogEnum.DATE) {
@@ -148,6 +156,42 @@ class TaskFragment : Fragment() {
         }, { setOnClickListenerForBackButtonForCalendarDialog() })
         dateDialog.dismiss()
         calendarDialog.show(parentFragmentManager, CALENDAR_DIALOG)
+    }
+
+    private fun setOnClickListenerForNoteButton() {
+        binging.tvNote.setOnClickListener {
+            showNoteFragment(task)
+        }
+    }
+
+    private fun showNoteFragment(task: Task) {
+        val note = if (task.note != null) task.note!! else ""
+        val direction = TaskFragmentDirections.actionTaskFragmentToNoteFragment(note)
+        findNavController().navigate(direction)
+    }
+
+    private fun setOnClickListenerForRemoveDateIcon() {
+        binging.ivRemoveDate.setOnClickListener {
+            task.date = null
+            viewModel.updateTask(task)
+            with(binging.tvDate) {
+                text = getString(R.string.indefinitely)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.white_60_per))
+            }
+            binging.ivRemoveDate.visibility = View.GONE
+        }
+    }
+
+    private fun setOnClickListenerForRemoveNoteIcon() {
+        binging.ivRemoveNote.setOnClickListener {
+            task.note = null
+            viewModel.updateTask(task)
+            with(binging.tvNote) {
+                text = getString(R.string.no_note)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.white_60_per))
+                binging.ivRemoveNote.visibility = View.GONE
+            }
+        }
     }
 
     companion object {

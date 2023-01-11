@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.src.todo.R
 import com.src.todo.databinding.FragmentCalendarBottomSheetDialogBinding
-import com.src.todo.presentation.MainActivity
-import com.src.todo.presentation.task.viewModel.TaskViewModel
 import java.util.*
 
 
@@ -18,7 +16,6 @@ class CalendarBottomSheetDialogFragment(
 ) :
     BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCalendarBottomSheetDialogBinding
-    private lateinit var viewModel: TaskViewModel
     private var dateTimInMillis: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +27,6 @@ class CalendarBottomSheetDialogFragment(
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCalendarBottomSheetDialogBinding.inflate(inflater)
-        viewModel = (activity as MainActivity).getTaskViewModel()
         return binding.root
     }
 

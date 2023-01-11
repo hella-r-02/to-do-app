@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.src.todo.R
 import com.src.todo.databinding.FragmentDateBottomSheetDialogBinding
-import com.src.todo.presentation.MainActivity
-import com.src.todo.presentation.task.viewModel.TaskViewModel
 import com.src.todo.presentation.utils.DAY_OF_WEEK_FORMAT
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,13 +17,11 @@ class DateBottomSheetDialogFragment(
 ) :
     BottomSheetDialogFragment() {
     private lateinit var binding: FragmentDateBottomSheetDialogBinding
-    private lateinit var viewModel: TaskViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDateBottomSheetDialogBinding.inflate(inflater, container, false)
-        viewModel = (activity as MainActivity).getTaskViewModel()
         return binding.root
     }
 

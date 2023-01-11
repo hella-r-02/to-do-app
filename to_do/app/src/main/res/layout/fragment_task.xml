@@ -111,7 +111,6 @@
         android:src="@drawable/calendar_icon"
         app:layout_constraintBottom_toBottomOf="@id/tv_date"
         app:layout_constraintStart_toEndOf="@id/gl_left"
-        app:layout_constraintTop_toTopOf="@id/tv_date"
         app:tint="@color/white_60_per"
         tools:ignore="ContentDescription" />
 
@@ -127,12 +126,22 @@
         app:layout_constraintTop_toBottomOf="@id/barrier_task"
         app:layout_goneMarginStart="@dimen/space_2x" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_remove_date"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/close_icon"
+        app:layout_constraintBottom_toBottomOf="@id/tv_date"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintTop_toTopOf="@id/tv_date"
+        app:tint="@color/white_60_per" />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tv_date,iv_calendar" />
+        app:constraint_referenced_ids="tv_date,iv_calendar,iv_remove_date" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_pen"
@@ -153,9 +162,21 @@
         android:layout_marginStart="@dimen/space_4x"
         android:layout_marginTop="@dimen/space_5x"
         android:text="@string/no_note"
+        android:layout_marginEnd="@dimen/space_4x"
         app:layout_constraintStart_toEndOf="@id/iv_pen"
+        app:layout_constraintEnd_toStartOf="@id/iv_remove_note"
         app:layout_constraintTop_toBottomOf="@id/barrier_date"
         app:layout_goneMarginStart="@dimen/space_2x" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_remove_note"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/close_icon"
+        app:layout_constraintBottom_toBottomOf="@id/tv_note"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintTop_toTopOf="@id/tv_note"
+        app:tint="@color/white_60_per" />
 
     <ImageView
         android:layout_width="@dimen/space_5x"

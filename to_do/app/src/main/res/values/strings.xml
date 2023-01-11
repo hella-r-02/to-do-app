@@ -20,4 +20,6 @@
     <string name="name">Название</string>
     <string name="select_date">Выбрать дату</string>
     <string name="set">Установить</string>
+    <string name="done">Готово</string>
+    <string name="text_note">Текст заметки...</string>
 </resources>

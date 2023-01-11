@@ -30,4 +30,15 @@ class TaskViewModel(
             updateTaskUseCase.execute(task)
         }
     }
+
+    fun updateNote(note: String?) {
+        viewModelScope.launch {
+            if (_mutableLiveDataLoadTaskState.value is State.SuccessState) {
+                val task = (_mutableLiveDataLoadTaskState.value as State.SuccessState<Task>).data
+                task.note = note
+                updateTaskUseCase.execute(task)
+                _mutableLiveDataLoadTaskState.value = State.SuccessState(task)
+            }
+        }
+    }
 }
