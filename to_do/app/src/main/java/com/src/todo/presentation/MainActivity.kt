@@ -7,6 +7,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.src.todo.App
 import com.src.todo.R
+import com.src.todo.presentation.createFolder.viewModel.CreateFolderViewModel
+import com.src.todo.presentation.createFolder.viewModel.CreateFolderViewModelFactory
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModelFactory
 import com.src.todo.presentation.listOfTask.viewModel.ListOfTasksViewModel
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var taskViewModelFactory: TaskViewModelFactory
+
+    @Inject
+    lateinit var createFolderViewModelFactory: CreateFolderViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,4 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getTaskViewModel(): TaskViewModel =
         ViewModelProvider(this, taskViewModelFactory)[TaskViewModel::class.java]
+
+    fun getCreateFolderViewModel(): CreateFolderViewModel =
+        ViewModelProvider(this, createFolderViewModelFactory)[CreateFolderViewModel::class.java]
 }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listOfFoldersFragment_to_listOfTasksFragment"
             app:destination="@id/listOfTasksFragment" />
+        <action
+            android:id="@+id/action_listOfFoldersFragment_to_createFolderFragment"
+            app:destination="@id/createFolderFragment" />
     </fragment>
     <fragment
         android:id="@+id/listOfTasksFragment"
@@ -48,5 +51,15 @@
         <argument
             android:name="taskNote"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createFolderFragment"
+        android:name="com.src.todo.presentation.createFolder.CreateFolderFragment"
+        android:label="CreateFolderFragment" >
+        <action
+            android:id="@+id/action_createFolderFragment_to_listOfTasksFragment"
+            app:destination="@id/listOfTasksFragment"
+            app:popUpTo="@id/createFolderFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

@@ -20,7 +20,7 @@ class ListOfFoldersAdapter(private val onClickFolder: (item: Long, name: String)
         @SuppressLint("SimpleDateFormat")
         fun onBind(
             folderWithCountOfTasks: FolderWithCountOfTasks,
-            onClickFolder: (item: Long,name:String) -> Unit
+            onClickFolder: (item: Long, name: String) -> Unit
         ) {
             binding.tvCountOfTasks.text = folderWithCountOfTasks.count.toString()
             binding.tvFolderName.text = folderWithCountOfTasks.folder.name

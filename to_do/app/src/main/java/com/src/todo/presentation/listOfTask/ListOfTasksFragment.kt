@@ -36,7 +36,7 @@ class ListOfTasksFragment : Fragment() {
         val id = args.folderId
         val name = args.folderName
         viewModel.liveDataLoadTasksState.observe(viewLifecycleOwner, this::parseState)
-        binding.tvFolderName.text = name
+        binding.tvFolderName.setText(name)
         setOnClickListenerForBackButton()
         viewModel.getTasks(id)
     }

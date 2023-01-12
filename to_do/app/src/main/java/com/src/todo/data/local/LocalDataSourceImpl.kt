@@ -3,6 +3,7 @@ package com.src.todo.data.local
 import com.src.todo.data.local.entity.FolderEntity
 import com.src.todo.data.local.entity.TaskEntity
 import com.src.todo.data.local.entity.views.FolderWithCountOfTasksView
+import com.src.todo.domain.model.Folder
 import com.src.todo.domain.model.FolderWithCountOfTasks
 import com.src.todo.domain.model.Task
 import kotlinx.coroutines.Dispatchers
@@ -11,8 +12,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSource {
-    override fun insertFolder(name: String) {
-        database.getFolderDao().insert(FolderEntity.fromNameOfFolder(name))
+    override fun insertFolder(name: String): Long {
+        return database.getFolderDao().insert(FolderEntity.fromNameOfFolder(name))
     }
 
     override fun getFoldersWithCountOfTasks(): Flow<List<FolderWithCountOfTasks>> {
@@ -32,6 +33,11 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
     override fun updateTask(task: Task) {
         val taskEntity = TaskEntity.fromTaskModel(task)
         database.getTaskDao().updateTask(taskEntity)
+    }
+
+    override fun deleteFolder(folder: Folder) {
+        val folderEntity = FolderEntity.fromFolderModel(folder)
+        database.getFolderDao().deleteFolder(folderEntity)
     }
 
     private suspend fun mapFoldersWithCountOfTasksViewToModel(folderWithCountOfTasksView: FolderWithCountOfTasksView): FolderWithCountOfTasks =

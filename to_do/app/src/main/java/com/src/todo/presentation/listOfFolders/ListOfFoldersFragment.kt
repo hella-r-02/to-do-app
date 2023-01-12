@@ -8,17 +8,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.src.todo.databinding.FragmentListOfFoldersBinding
 import com.src.todo.domain.model.FolderWithCountOfTasks
 import com.src.todo.presentation.MainActivity
 import com.src.todo.presentation.adapters.ListOfFoldersAdapter
+import com.src.todo.presentation.adapters.SwipeToDeleteCallback
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
 import com.src.todo.presentation.utils.State
 
 class ListOfFoldersFragment : Fragment() {
     private lateinit var binding: FragmentListOfFoldersBinding
     private lateinit var viewModel: ListOfFoldersViewModel
+    private lateinit var listOfFolders: java.util.ArrayList<FolderWithCountOfTasks>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,7 @@ class ListOfFoldersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.liveDataLoadFoldersState.observe(viewLifecycleOwner, this::parseState)
         viewModel.getFolders()
+        setOnClickListenerForAddFolderButton()
     }
 
     private fun parseState(state: State<List<FolderWithCountOfTasks>>) {
@@ -57,11 +61,23 @@ class ListOfFoldersFragment : Fragment() {
     }
 
     private fun setDataForListOfFoldersAdapter(folders: List<FolderWithCountOfTasks>) {
+        this.listOfFolders = ArrayList(folders)
         val adapter = ListOfFoldersAdapter { id, name -> openFolder(id, name) }
-        adapter.submitList(folders)
+        adapter.submitList(listOfFolders)
         binding.rvFolders.layoutManager =
             GridLayoutManager(requireContext(), 1, RecyclerView.VERTICAL, false)
         binding.rvFolders.adapter = adapter
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val listOfFoldersAdapter = binding.rvFolders.adapter as ListOfFoldersAdapter
+                val folder = listOfFoldersAdapter.currentList[viewHolder.adapterPosition]
+                listOfFolders.removeAt(viewHolder.adapterPosition)
+                listOfFoldersAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                viewModel.deleteFolder(folder)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvFolders)
     }
 
     private fun openFolder(id: Long, name: String) {
@@ -71,5 +87,13 @@ class ListOfFoldersFragment : Fragment() {
                 name
             )
         findNavController().navigate(direction)
+    }
+
+    private fun setOnClickListenerForAddFolderButton() {
+        binding.clAddFolder.setOnClickListener {
+            val direction =
+                ListOfFoldersFragmentDirections.actionListOfFoldersFragmentToCreateFolderFragment()
+            findNavController().navigate(direction)
+        }
     }
 }
