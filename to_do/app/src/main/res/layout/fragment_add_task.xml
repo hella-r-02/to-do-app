@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:paddingBottom="@dimen/space_5x"
+    tools:context=".presentation.addTask.AddTaskFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/space_5x" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/space_5x" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/space_5x" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/gl_top">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/back_icon"
+            app:layout_constraintBottom_toBottomOf="@id/tv_back"
+            app:layout_constraintStart_toStartOf="@id/cl_button_back"
+            app:layout_constraintTop_toTopOf="@id/tv_back"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_back"
+            style="@style/main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/space_1x"
+            android:text="@string/tasks"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/cl_button_back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_5x"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/iv_submit"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintStart_toEndOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/cl_button_back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_complete"
+                android:layout_width="@dimen/space_5x"
+                android:layout_height="@dimen/space_5x"
+                android:background="@drawable/task_unfulfilled_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <EditText
+                android:id="@+id/et_task_name"
+                style="@style/main_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_4x"
+                android:background="@android:color/transparent"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:textColorHint="@color/white_60_per"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/iv_complete"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="@dimen/space_2x"
+                tools:ignore="TextViewEdits" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_calendar"
+                android:layout_width="@dimen/space_5x"
+                android:layout_height="@dimen/space_5x"
+                android:src="@drawable/calendar_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tv_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/white_60_per"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/unselected_option_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_4x"
+                android:layout_marginTop="@dimen/space_5x"
+                android:text="@string/indefinitely"
+                app:layout_constraintStart_toEndOf="@id/iv_calendar"
+                app:layout_constraintTop_toBottomOf="@id/et_task_name"
+                app:layout_goneMarginStart="@dimen/space_2x" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_remove_date"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/close_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tv_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_date"
+                app:tint="@color/white_60_per" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tv_date,iv_calendar,iv_remove_date" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_pen"
+                android:layout_width="@dimen/space_5x"
+                android:layout_height="@dimen/space_5x"
+                android:src="@drawable/pen_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tv_note"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_note"
+                app:tint="@color/white_60_per"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_note"
+                style="@style/unselected_option_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_4x"
+                android:layout_marginTop="@dimen/space_5x"
+                android:layout_marginEnd="@dimen/space_4x"
+                android:text="@string/no_note"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_remove_note"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/iv_pen"
+                app:layout_constraintTop_toBottomOf="@id/barrier_date"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_goneMarginStart="@dimen/space_2x" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_remove_note"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/close_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tv_note"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_note"
+                app:tint="@color/white_60_per" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_submit"
+        android:layout_width="@dimen/space_10x"
+        android:layout_height="@dimen/space_10x"
+        android:layout_marginBottom="@dimen/space_5x"
+        android:src="@drawable/ic_baseline_check_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

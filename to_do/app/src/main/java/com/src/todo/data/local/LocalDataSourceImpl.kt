@@ -40,6 +40,11 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
         database.getFolderDao().deleteFolder(folderEntity)
     }
 
+    override fun insertTask(task: Task) {
+        val taskEntity = TaskEntity.fromTaskModel(task)
+        database.getTaskDao().insertTask(taskEntity)
+    }
+
     private suspend fun mapFoldersWithCountOfTasksViewToModel(folderWithCountOfTasksView: FolderWithCountOfTasksView): FolderWithCountOfTasks =
         withContext(Dispatchers.IO) {
             return@withContext FolderWithCountOfTasks(

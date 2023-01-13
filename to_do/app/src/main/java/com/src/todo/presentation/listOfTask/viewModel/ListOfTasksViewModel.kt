@@ -5,14 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.src.todo.domain.model.TaskWithDate
 import com.src.todo.domain.usecase.task.GetTasksByFolderIdUseCase
+import com.src.todo.domain.usecase.task.InsertTaskUseCase
 import com.src.todo.presentation.utils.State
 import kotlinx.coroutines.launch
 
-class ListOfTasksViewModel(private val getTasksByFolderIdUseCase: GetTasksByFolderIdUseCase) :
+class ListOfTasksViewModel(
+    private val getTasksByFolderIdUseCase: GetTasksByFolderIdUseCase
+) :
     ViewModel() {
     private val _mutableLiveDataLoadTasksState =
         MutableLiveData<State<List<TaskWithDate>>>(State.EmptyState())
     val liveDataLoadTasksState get() = _mutableLiveDataLoadTasksState
+
 
     fun getTasks(folderId: Long) {
         viewModelScope.launch {

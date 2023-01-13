@@ -31,6 +31,11 @@
         <action
             android:id="@+id/action_listOfTasksFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_listOfTasksFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment"
+            app:popUpTo="@id/createFolderFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/taskFragment"
@@ -61,5 +66,24 @@
             app:destination="@id/listOfTasksFragment"
             app:popUpTo="@id/createFolderFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.src.todo.presentation.addTask.AddTaskFragment"
+        android:label="AddTaskFragment" >
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_addTaskFragment_to_noteAddTaskFragment"
+            app:destination="@id/noteAddTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteAddTaskFragment"
+        android:name="com.src.todo.presentation.addTask.NoteAddTaskFragment"
+        android:label="NoteAddTaskFragment" >
+        <argument
+            android:name="taskNote"
+            app:argType="string" />
     </fragment>
 </navigation>

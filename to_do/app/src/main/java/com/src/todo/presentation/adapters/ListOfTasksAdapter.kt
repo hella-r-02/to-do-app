@@ -52,9 +52,9 @@ class ListOfTasksAdapter(private val onClickTask: (taskId: Long) -> Unit) :
                 bindingTask.tvDate.setTextColor(ContextCompat.getColor(context, colorId))
                 bindingTask.tvDate.text = SimpleDateFormat(SHORT_DATE_FORMAT).format(task.date)
             }
-           itemView.setOnClickListener {
-               onClickTask(task.id)
-           }
+            itemView.setOnClickListener {
+                onClickTask(task.id)
+            }
         }
 
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -107,11 +107,12 @@ class ListOfTasksAdapter(private val onClickTask: (taskId: Long) -> Unit) :
         holder.onBind(item, onClickTask)
     }
 
-    fun setData(data: List<TaskWithDate>) {
+    override fun submitList(list: List<TaskWithDate>?) {
         adapterData.apply {
             clear()
-            addAll(data)
+            list?.let { addAll(it) }
         }
+        super.submitList(list)
     }
 
     companion object {

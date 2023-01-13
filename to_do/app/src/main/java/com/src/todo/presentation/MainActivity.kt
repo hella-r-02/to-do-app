@@ -7,6 +7,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.src.todo.App
 import com.src.todo.R
+import com.src.todo.presentation.addTask.viewModel.AddTaskViewModel
+import com.src.todo.presentation.addTask.viewModel.AddTaskViewModelFactory
 import com.src.todo.presentation.createFolder.viewModel.CreateFolderViewModel
 import com.src.todo.presentation.createFolder.viewModel.CreateFolderViewModelFactory
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var createFolderViewModelFactory: CreateFolderViewModelFactory
 
+    @Inject
+    lateinit var addTaskViewModelFactory: AddTaskViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (applicationContext as App).appComponent.inject(this)
@@ -56,4 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getCreateFolderViewModel(): CreateFolderViewModel =
         ViewModelProvider(this, createFolderViewModelFactory)[CreateFolderViewModel::class.java]
+
+    fun getAddTaskViewModel(): AddTaskViewModel =
+        ViewModelProvider(this, addTaskViewModelFactory)[AddTaskViewModel::class.java]
 }

@@ -20,4 +20,8 @@ class TaskRepositoryImpl(private val localDataSource: LocalDataSource) : TaskRep
     override suspend fun updateTask(task: Task) = withContext(Dispatchers.IO) {
         localDataSource.updateTask(task)
     }
+
+    override suspend fun insertTask(task: Task) = withContext(Dispatchers.IO) {
+        localDataSource.insertTask(task)
+    }
 }

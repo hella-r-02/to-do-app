@@ -1,8 +1,6 @@
 package com.src.todo.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.src.todo.data.local.entity.TaskEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -21,4 +19,7 @@ interface TaskDao {
 
     @Update
     fun updateTask(taskEntity: TaskEntity)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertTask(taskEntity: TaskEntity)
 }
