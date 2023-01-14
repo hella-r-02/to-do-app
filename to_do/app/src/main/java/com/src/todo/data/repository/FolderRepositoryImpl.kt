@@ -21,4 +21,9 @@ class FolderRepositoryImpl(private val localDataSource: LocalDataSource) : Folde
     override suspend fun deleteFolder(folder: Folder) = withContext(Dispatchers.IO) {
         localDataSource.deleteFolder(folder)
     }
+
+    override suspend fun updateFolderNameByFolderId(name: String, id: Long) =
+        withContext(Dispatchers.IO) {
+            localDataSource.updateFolderNameByFolderId(name, id)
+        }
 }

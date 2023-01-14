@@ -8,4 +8,5 @@ interface FolderRepository {
     suspend fun insertFolder(name: String): Long
     suspend fun getFoldersWithCountOfTasks(): Flow<List<FolderWithCountOfTasks>>
     suspend fun deleteFolder(folder: Folder)
+    suspend fun updateFolderNameByFolderId(name: String, id: Long)
 }

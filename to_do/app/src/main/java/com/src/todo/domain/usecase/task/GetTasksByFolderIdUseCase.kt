@@ -4,13 +4,15 @@ import android.annotation.SuppressLint
 import com.src.todo.domain.model.TaskWithDate
 import com.src.todo.domain.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
 import java.util.*
 
 class GetTasksByFolderIdUseCase(private val taskRepository: TaskRepository) {
     @SuppressLint("SimpleDateFormat")
-    suspend fun execute(folderId: Long): List<TaskWithDate>? = withContext(Dispatchers.IO) {
+    suspend fun execute(folderId: Long): Flow<List<TaskWithDate>> = withContext(Dispatchers.IO) {
         val listOfTaskWithDate = ArrayList<TaskWithDate>()
         val tasks = taskRepository.getTasksByFolderId(folderId).first()
         if (tasks.isNotEmpty()) {
@@ -38,8 +40,8 @@ class GetTasksByFolderIdUseCase(private val taskRepository: TaskRepository) {
                     date = it.date
                 }
             }
-            return@withContext listOfTaskWithDate
+            return@withContext flowOf(listOfTaskWithDate)
         }
-        return@withContext null
+        return@withContext flowOf(emptyList())
     }
 }

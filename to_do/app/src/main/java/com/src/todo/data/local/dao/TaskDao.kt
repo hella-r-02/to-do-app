@@ -22,4 +22,7 @@ interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertTask(taskEntity: TaskEntity)
+
+    @Query("delete from tasks where id=:id")
+    fun deleteTaskById(id: Long)
 }

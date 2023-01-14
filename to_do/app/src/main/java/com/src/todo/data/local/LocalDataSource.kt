@@ -14,4 +14,6 @@ interface LocalDataSource {
     fun updateTask(task: Task)
     fun deleteFolder(folder: Folder)
     fun insertTask(task: Task)
+    fun deleteTask(id: Long)
+    fun updateFolderNameByFolderId(name: String, folderId: Long)
 }

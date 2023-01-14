@@ -45,7 +45,7 @@ class TaskFragment : Fragment() {
         val id = args.taskId
         viewModel.getTask(id)
         setOnClickListenerForBackButton()
-        setOnFocusChangeListener()
+        setOnFocusChangeListenerForTaskName()
         showDateDialog()
         setOnClickListenerForRemoveNoteIcon()
         setOnClickListenerForRemoveDateIcon()
@@ -65,7 +65,6 @@ class TaskFragment : Fragment() {
 
     private fun setData(task: Task) {
         this.task = task
-        binging.tvTaskName.text = task.name
         binging.etTaskName.setText(task.name)
         with(binging.tvDate) {
             if (task.date != null) {
@@ -98,7 +97,7 @@ class TaskFragment : Fragment() {
         }
     }
 
-    private fun setOnFocusChangeListener() {
+    private fun setOnFocusChangeListenerForTaskName() {
         binging.etTaskName.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 binging.etTaskName.clearFocus()

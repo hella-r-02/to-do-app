@@ -5,10 +5,8 @@ import com.src.todo.domain.repository.TaskRepository
 import com.src.todo.domain.usecase.folder.DeleteFolderUseCase
 import com.src.todo.domain.usecase.folder.GetListOfFoldersWithCountTasksUseCase
 import com.src.todo.domain.usecase.folder.InsertFolderUseCase
-import com.src.todo.domain.usecase.task.GetTaskByIdUseCase
-import com.src.todo.domain.usecase.task.GetTasksByFolderIdUseCase
-import com.src.todo.domain.usecase.task.InsertTaskUseCase
-import com.src.todo.domain.usecase.task.UpdateTaskUseCase
+import com.src.todo.domain.usecase.folder.UpdateFolderNameByFolderIdUseCase
+import com.src.todo.domain.usecase.task.*
 import dagger.Module
 import dagger.Provides
 
@@ -47,5 +45,15 @@ class DomainModule {
     @Provides
     fun provideInsertTaskUseCase(taskRepository: TaskRepository): InsertTaskUseCase {
         return InsertTaskUseCase(taskRepository = taskRepository)
+    }
+
+    @Provides
+    fun provideDeleteTask(taskRepository: TaskRepository): DeleteTaskUseCase {
+        return DeleteTaskUseCase(taskRepository = taskRepository)
+    }
+
+    @Provides
+    fun provideUpdateFolderNameByFolderIdUseCase(folderRepository: FolderRepository): UpdateFolderNameByFolderIdUseCase {
+        return UpdateFolderNameByFolderIdUseCase(folderRepository = folderRepository)
     }
 }

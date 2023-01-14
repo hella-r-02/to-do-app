@@ -57,15 +57,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/tv_folder_name"
+        android:id="@+id/et_folder_name"
         style="@style/main_text"
         android:layout_width="0dp"
-        android:background="@android:color/transparent"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
+        android:layout_marginTop="@dimen/space_4x"
+        android:background="@android:color/transparent"
+        android:imeOptions="actionDone"
+        android:hint="@string/untitled"
+        android:inputType="text"
         android:maxLines="1"
         android:text="@string/untitled"
-        android:layout_marginTop="@dimen/space_4x"
+        android:textColorHint="@color/white_60_per"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/gl_right"
@@ -81,9 +84,9 @@
         app:layout_constraintBottom_toTopOf="@id/cl_add_task"
         app:layout_constraintEnd_toStartOf="@id/gl_right"
         app:layout_constraintStart_toEndOf="@id/gl_left"
-        tools:listitem="@layout/view_holder_task"
+        app:layout_constraintTop_toBottomOf="@id/et_folder_name"
         tools:itemCount="8"
-        app:layout_constraintTop_toBottomOf="@id/tv_folder_name" />
+        tools:listitem="@layout/view_holder_task" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_add_task"

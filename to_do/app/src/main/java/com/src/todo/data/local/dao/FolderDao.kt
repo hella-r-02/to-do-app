@@ -15,4 +15,7 @@ interface FolderDao {
 
     @Delete
     fun deleteFolder(folderEntity: FolderEntity)
+
+    @Query("update folders set name=:name where id=:id")
+    fun updateNameById(name: String, id: Long)
 }

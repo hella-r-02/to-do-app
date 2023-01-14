@@ -45,6 +45,14 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
         database.getTaskDao().insertTask(taskEntity)
     }
 
+    override fun deleteTask(id: Long) {
+        database.getTaskDao().deleteTaskById(id)
+    }
+
+    override fun updateFolderNameByFolderId(name: String, folderId: Long) {
+        database.getFolderDao().updateNameById(name, folderId)
+    }
+
     private suspend fun mapFoldersWithCountOfTasksViewToModel(folderWithCountOfTasksView: FolderWithCountOfTasksView): FolderWithCountOfTasks =
         withContext(Dispatchers.IO) {
             return@withContext FolderWithCountOfTasks(
