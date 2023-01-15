@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9855acdb3af418212ea0cc607682ae01",
+    "identityHash": "73bcd69b5d41de94e0994073dbb35560",
     "entities": [
       {
         "tableName": "folders",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "tasks",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `date` INTEGER, `note` TEXT, `repeating` INTEGER, `folder_id` INTEGER NOT NULL, FOREIGN KEY(`folder_id`) REFERENCES `folders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `date` INTEGER, `note` TEXT, `folder_id` INTEGER NOT NULL, FOREIGN KEY(`folder_id`) REFERENCES `folders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -56,12 +56,6 @@
             "fieldPath": "note",
             "columnName": "note",
             "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "repeating",
-            "columnName": "repeating",
-            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -93,10 +87,15 @@
         ]
       }
     ],
-    "views": [],
+    "views": [
+      {
+        "viewName": "folders_with_count_of_tasks",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS select folders.id, folders.name, count(distinct tasks.id) as task_count from folders\nleft join tasks on tasks.folder_id=folders.id\ngroup by folders.id"
+      }
+    ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9855acdb3af418212ea0cc607682ae01')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '73bcd69b5d41de94e0994073dbb35560')"
     ]
   }
 }
