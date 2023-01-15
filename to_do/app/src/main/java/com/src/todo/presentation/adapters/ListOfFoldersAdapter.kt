@@ -3,9 +3,11 @@ package com.src.todo.presentation.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.src.todo.R
 import com.src.todo.databinding.ViewHolderFolderBinding
 import com.src.todo.domain.model.FolderWithCountOfTasks
 
@@ -44,6 +46,8 @@ class ListOfFoldersAdapter(private val onClickFolder: (item: Long, name: String)
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.animation =
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fade_in)
         holder.onBind(item, onClickFolder)
     }
 }

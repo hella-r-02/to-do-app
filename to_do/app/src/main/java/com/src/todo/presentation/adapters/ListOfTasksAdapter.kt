@@ -156,6 +156,8 @@ class ListOfTasksAdapter(
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.animation =
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fade_in)
         holder.onBind(item, onClickTask, deleteTask)
     }
 

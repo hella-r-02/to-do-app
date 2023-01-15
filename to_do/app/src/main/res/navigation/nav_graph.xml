@@ -12,10 +12,16 @@
         tools:layout="@layout/fragment_list_of_folders">
         <action
             android:id="@+id/action_listOfFoldersFragment_to_listOfTasksFragment"
-            app:destination="@id/listOfTasksFragment" />
+            app:destination="@id/listOfTasksFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_listOfFoldersFragment_to_createFolderFragment"
-            app:destination="@id/createFolderFragment" />
+            app:destination="@id/createFolderFragment"
+            app:enterAnim="@anim/push_up_in"
+            app:popExitAnim="@anim/push_down_out"/>
     </fragment>
     <fragment
         android:id="@+id/listOfTasksFragment"
@@ -30,12 +36,17 @@
             app:argType="string" />
         <action
             android:id="@+id/action_listOfTasksFragment_to_taskFragment"
-            app:destination="@id/taskFragment" />
+            app:destination="@id/taskFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_listOfTasksFragment_to_addTaskFragment"
             app:destination="@id/addTaskFragment"
+            app:enterAnim="@anim/push_up_in"
             app:popUpTo="@id/createFolderFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/taskFragment"
@@ -47,12 +58,14 @@
             app:argType="long" />
         <action
             android:id="@+id/action_taskFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/push_up_in"
+            app:popExitAnim="@anim/push_down_out"/>
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.src.todo.presentation.task.NoteFragment"
-        android:label="NoteFragment" >
+        android:label="NoteFragment">
         <argument
             android:name="taskNote"
             app:argType="string" />
@@ -60,28 +73,30 @@
     <fragment
         android:id="@+id/createFolderFragment"
         android:name="com.src.todo.presentation.createFolder.CreateFolderFragment"
-        android:label="CreateFolderFragment" >
+        android:label="CreateFolderFragment">
         <action
             android:id="@+id/action_createFolderFragment_to_listOfTasksFragment"
             app:destination="@id/listOfTasksFragment"
             app:popUpTo="@id/createFolderFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.src.todo.presentation.addTask.AddTaskFragment"
-        android:label="AddTaskFragment" >
+        android:label="AddTaskFragment">
         <argument
             android:name="folder_id"
             app:argType="long" />
         <action
             android:id="@+id/action_addTaskFragment_to_noteAddTaskFragment"
-            app:destination="@id/noteAddTaskFragment" />
+            app:destination="@id/noteAddTaskFragment"
+            app:enterAnim="@anim/push_up_in"
+            app:popExitAnim="@anim/push_down_out" />
     </fragment>
     <fragment
         android:id="@+id/noteAddTaskFragment"
         android:name="com.src.todo.presentation.addTask.NoteAddTaskFragment"
-        android:label="NoteAddTaskFragment" >
+        android:label="NoteAddTaskFragment">
         <argument
             android:name="taskNote"
             app:argType="string" />
