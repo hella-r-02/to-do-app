@@ -1,6 +1,5 @@
 package com.src.todo.presentation.listOfTask
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -67,7 +66,7 @@ class ListOfTasksFragment : Fragment() {
 
     private fun setAdapterForListOfTasksRecyclerView() {
         val adapter = ListOfTasksAdapter({ id -> setOnClickListenerForTask(id) },
-            { id -> deleteTask(id) })
+            { id, position -> deleteTask(id, position) })
         adapter.submitList(null)
         val layoutInflater =
             GridLayoutManager(requireContext(), 1, RecyclerView.VERTICAL, false)
@@ -75,12 +74,10 @@ class ListOfTasksFragment : Fragment() {
         binding.rvTasks.adapter = adapter
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setDataForListOfTasks(tasksWithDate: List<TaskWithDate>?) {
         listOfTasks = tasksWithDate?.let { ArrayList(it) }
         val adapter = binding.rvTasks.adapter as ListOfTasksAdapter
         adapter.submitList(listOfTasks)
-
     }
 
     private fun setOnClickListenerForBackButton() {
@@ -107,8 +104,19 @@ class ListOfTasksFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
-    private fun deleteTask(id: Long) {
-        viewModel.deleteTask(id, folderId)
+    private fun deleteTask(id: Long, position: Int) {
+        viewModel.deleteTask(id)
+        listOfTasks?.removeAt(position)
+        val adapter = binding.rvTasks.adapter as ListOfTasksAdapter
+        adapter.notifyItemRemoved(position)
+        adapter.notifyItemRangeChanged(position, listOfTasks?.size!!)
+        if (listOfTasks?.get(position - 1) is TaskWithDate.DateTask) {
+            if (position == (listOfTasks?.size) || listOfTasks?.get(position) is TaskWithDate.DateTask) {
+                listOfTasks?.removeAt(position - 1)
+                adapter.notifyItemRemoved(position - 1)
+                adapter.notifyItemRangeChanged(position - 1, listOfTasks?.size!!)
+            }
+        }
     }
 
     private fun setOnFocusChangeListenerForFolderName() {

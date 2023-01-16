@@ -24,7 +24,7 @@ import java.util.*
 
 class ListOfTasksAdapter(
     private val onClickTask: (taskId: Long) -> Unit,
-    private val deleteTask: (id: Long) -> Unit
+    private val deleteTask: (id: Long, position: Int) -> Unit
 ) :
     ListAdapter<TaskWithDate, ListOfTasksAdapter.DataViewHolder>(TaskWithDateDiffCallback()) {
     private lateinit var binding: ViewBinding
@@ -36,7 +36,7 @@ class ListOfTasksAdapter(
         private fun onBindTask(
             task: TaskWithDate.Task,
             onClickTask: (taskId: Long) -> Unit,
-            deleteTask: (id: Long) -> Unit
+            deleteTask: (id: Long, position: Int) -> Unit
         ) {
             val bindingTask = binding as ViewHolderTaskBinding
             bindingTask.tvTaskName.text = task.name
@@ -77,7 +77,7 @@ class ListOfTasksAdapter(
                             }
 
                             override fun onAnimationEnd(p0: Animation?) {
-                                deleteTask(task.id)
+                                deleteTask(task.id, adapterPosition)
                             }
 
                             override fun onAnimationRepeat(p0: Animation?) {
@@ -95,7 +95,7 @@ class ListOfTasksAdapter(
                 binding.ivComplete.startAnimation(animationOut)
             }
             binding.ivTrash.setOnClickListener {
-                deleteTask(task.id)
+                deleteTask(task.id, adapterPosition)
             }
             itemView.setOnClickListener {
                 onClickTask(task.id)
@@ -112,11 +112,15 @@ class ListOfTasksAdapter(
         fun onBind(
             taskWithDate: TaskWithDate,
             onClickTask: (taskId: Long) -> Unit,
-            deleteTask: (id: Long) -> Unit
+            deleteTask: (id: Long, position: Int) -> Unit
         ) {
             when (taskWithDate) {
-                is TaskWithDate.Task -> onBindTask(taskWithDate, onClickTask, deleteTask)
-                is TaskWithDate.DateTask -> onBindDate(taskWithDate)
+                is TaskWithDate.Task -> {
+                    onBindTask(taskWithDate, onClickTask, deleteTask)
+                }
+                is TaskWithDate.DateTask -> {
+                    onBindDate(taskWithDate)
+                }
             }
         }
 

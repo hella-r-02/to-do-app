@@ -29,10 +29,9 @@ class ListOfTasksViewModel(
         }
     }
 
-    fun deleteTask(id: Long, folderId: Long) {
+    fun deleteTask(id: Long) {
         viewModelScope.launch {
             deleteTaskUseCase.execute(id)
-            getTasks(folderId)
         }
     }
 
