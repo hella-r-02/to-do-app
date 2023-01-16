@@ -7,5 +7,5 @@ data class Task(
     var name: String,
     var date: Date?,
     var note: String?,
-    val folderId: Long,
+    val folderId: Long?,
 )

@@ -8,7 +8,7 @@ sealed class TaskWithDate {
         val name: String,
         val date: Date?,
         val note: String?,
-        val folderId: Long
+        val folderId: Long?
     ) : TaskWithDate()
 
     class DateTask(

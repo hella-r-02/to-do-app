@@ -15,6 +15,8 @@ import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModel
 import com.src.todo.presentation.listOfFolders.viewModel.ListOfFoldersViewModelFactory
 import com.src.todo.presentation.listOfTask.viewModel.ListOfTasksViewModel
 import com.src.todo.presentation.listOfTask.viewModel.ListOfTasksViewModelFactory
+import com.src.todo.presentation.listOfTasksWithoutFolder.viewModel.ListOfTasksWithoutFolderViewModel
+import com.src.todo.presentation.listOfTasksWithoutFolder.viewModel.ListOfTasksWithoutFolderViewModelFactory
 import com.src.todo.presentation.task.viewModel.TaskViewModel
 import com.src.todo.presentation.task.viewModel.TaskViewModelFactory
 import javax.inject.Inject
@@ -36,6 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var addTaskViewModelFactory: AddTaskViewModelFactory
+
+    @Inject
+    lateinit var listOfTasksWithoutFolderViewModelFactory: ListOfTasksWithoutFolderViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,4 +69,10 @@ class MainActivity : AppCompatActivity() {
 
     fun getAddTaskViewModel(): AddTaskViewModel =
         ViewModelProvider(this, addTaskViewModelFactory)[AddTaskViewModel::class.java]
+
+    fun getListOfTasksWithoutFolderViewModel(): ListOfTasksWithoutFolderViewModel =
+        ViewModelProvider(
+            this,
+            listOfTasksWithoutFolderViewModelFactory
+        )[ListOfTasksWithoutFolderViewModel::class.java]
 }

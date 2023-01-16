@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".presentation.listOfFolders.ListOfFoldersFragment">
+    tools:context=".presentation.listOfTask.ListOfTasksFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_top"
@@ -29,75 +28,65 @@
         app:layout_constraintGuide_end="@dimen/space_5x" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_list_of_tasks"
-        android:layout_width="0dp"
+        android:id="@+id/cl_button_back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/gl_right"
         app:layout_constraintStart_toEndOf="@id/gl_left"
         app:layout_constraintTop_toBottomOf="@id/gl_top">
 
-
         <ImageView
-            android:id="@+id/iv_list_of_tasks"
-            android:layout_width="@dimen/space_4x"
-            android:layout_height="@dimen/space_4x"
-            android:src="@drawable/to_do_list_icon"
-            app:layout_constraintBottom_toBottomOf="@id/tv_list_of_tasks"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_list_of_tasks"
+            android:id="@+id/iv_back"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/back_icon"
+            app:layout_constraintBottom_toBottomOf="@id/tv_back"
+            app:layout_constraintStart_toStartOf="@id/cl_button_back"
+            app:layout_constraintTop_toTopOf="@id/tv_back"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tv_list_of_tasks"
-            style="@style/medium_text"
+            android:id="@+id/tv_back"
+            style="@style/main_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_4x"
-            android:text="@string/list_of_task"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/iv_list_of_tasks"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_count_of_tasks"
-            style="@style/transparent_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/zero"
-            android:textColor="@color/white_60_per"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_list_of_tasks"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_list_of_tasks" />
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/space_1x"
+            android:text="@string/folders"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/cl_button_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/view_line"
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/main_text"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_4x"
-        android:background="@color/white_10_per"
+        android:background="@android:color/transparent"
+        android:maxLines="1"
+        android:text="@string/tasks"
+        android:textColorHint="@color/white_60_per"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/gl_right"
         app:layout_constraintStart_toEndOf="@id/gl_left"
-        app:layout_constraintTop_toBottomOf="@id/cl_list_of_tasks" />
+        app:layout_constraintTop_toBottomOf="@id/cl_button_back" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_folders"
+        android:id="@+id/rv_tasks"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/space_2x"
         android:layout_marginBottom="@dimen/space_4x"
-        app:layout_constraintBottom_toTopOf="@id/cl_add_folder"
+        app:layout_constraintBottom_toTopOf="@id/cl_add_task"
         app:layout_constraintEnd_toStartOf="@id/gl_right"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/gl_left"
-        app:layout_constraintTop_toBottomOf="@id/view_line"
-        app:layout_constraintVertical_bias="0.0"
-        tools:itemCount="24"
-        tools:listitem="@layout/view_holder_folder" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:itemCount="8"
+        tools:listitem="@layout/view_holder_task" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_add_folder"
+        android:id="@+id/cl_add_task"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/space_5x"
@@ -113,7 +102,7 @@
             android:layout_height="@dimen/space_4x"
             android:src="@drawable/plus_icon"
             app:layout_constraintBottom_toBottomOf="@id/tv_add_folder"
-            app:layout_constraintStart_toStartOf="@id/cl_add_folder"
+            app:layout_constraintStart_toStartOf="@id/cl_add_task"
             app:layout_constraintTop_toTopOf="@id/tv_add_folder"
             app:tint="@color/main_color" />
 
@@ -123,9 +112,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_4x"
-            android:text="@string/add_folder"
+            android:text="@string/add_task"
             app:layout_constraintStart_toEndOf="@id/iv_plus"
-            app:layout_constraintTop_toTopOf="@id/cl_add_folder" />
-
+            app:layout_constraintTop_toTopOf="@id/cl_add_task" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

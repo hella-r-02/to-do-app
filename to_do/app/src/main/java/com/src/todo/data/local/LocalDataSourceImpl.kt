@@ -53,6 +53,15 @@ class LocalDataSourceImpl(private val database: AppRoomDatabase) : LocalDataSour
         database.getFolderDao().updateNameById(name, folderId)
     }
 
+    override fun getAllTasksWithoutFolder(): Flow<List<Task>> {
+        return database.getTaskDao().getAllTasksWithoutFolder()
+            .map { list -> list.map { mapTaskEntityToModel(it) } }
+    }
+
+    override fun getCountOfTasksWithoutFolder(): Flow<Long> {
+        return database.getTaskDao().getCountOfTasksWithoutFolder()
+    }
+
     private suspend fun mapFoldersWithCountOfTasksViewToModel(folderWithCountOfTasksView: FolderWithCountOfTasksView): FolderWithCountOfTasks =
         withContext(Dispatchers.IO) {
             return@withContext FolderWithCountOfTasks(

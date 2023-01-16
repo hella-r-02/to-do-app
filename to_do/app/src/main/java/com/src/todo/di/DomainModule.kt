@@ -56,4 +56,14 @@ class DomainModule {
     fun provideUpdateFolderNameByFolderIdUseCase(folderRepository: FolderRepository): UpdateFolderNameByFolderIdUseCase {
         return UpdateFolderNameByFolderIdUseCase(folderRepository = folderRepository)
     }
+
+    @Provides
+    fun provideGetTasksWithoutFolderUseCase(taskRepository: TaskRepository): GetTasksWithoutFolderUseCase {
+        return GetTasksWithoutFolderUseCase(taskRepository = taskRepository)
+    }
+
+    @Provides
+    fun provideGetCountOfTasksWithoutFolderUseCase(taskRepository: TaskRepository): GetCountOfTasksWithoutFolderUseCase {
+        return GetCountOfTasksWithoutFolderUseCase(taskRepository = taskRepository)
+    }
 }

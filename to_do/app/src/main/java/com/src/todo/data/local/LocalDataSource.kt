@@ -16,4 +16,6 @@ interface LocalDataSource {
     fun insertTask(task: Task)
     fun deleteTask(id: Long)
     fun updateFolderNameByFolderId(name: String, folderId: Long)
+    fun getAllTasksWithoutFolder(): Flow<List<Task>>
+    fun getCountOfTasksWithoutFolder(): Flow<Long>
 }

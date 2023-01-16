@@ -35,8 +35,26 @@ class ListOfFoldersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.liveDataLoadFoldersState.observe(viewLifecycleOwner, this::parseState)
+        viewModel.liveDataCountOfTasksWithoutFolderState.observe(
+            viewLifecycleOwner,
+            this::parseCountOfTasksWithoutFolder
+        )
         viewModel.getFolders()
+        viewModel.getCountOfTasksWithoutFolders()
         setOnClickListenerForAddFolderButton()
+        setOnClickListenerForListOfTasksButton()
+    }
+
+    private fun parseCountOfTasksWithoutFolder(state: State<Long>) {
+        when (state) {
+            is State.LoadingState -> {
+                Log.d("Fragment", "Load")
+            }
+            is State.SuccessState -> {
+                binding.tvCountOfTasks.text = state.data.toString()
+            }
+            else -> {}
+        }
     }
 
     private fun parseState(state: State<List<FolderWithCountOfTasks>>) {
@@ -53,11 +71,11 @@ class ListOfFoldersFragment : Fragment() {
 
     private fun loadData(folders: List<FolderWithCountOfTasks>) {
         setDataForListOfFoldersAdapter(folders)
-        var countOfTasks: Long = 0
-        folders.forEach {
-            countOfTasks += it.count
-        }
-        binding.tvCountOfTasks.text = countOfTasks.toString()
+//        var countOfTasks: Long = 0
+//        folders.forEach {
+//            countOfTasks += it.count
+//        }
+//        binding.tvCountOfTasks.text = countOfTasks.toString()
     }
 
     private fun setDataForListOfFoldersAdapter(folders: List<FolderWithCountOfTasks>) {
@@ -95,5 +113,17 @@ class ListOfFoldersFragment : Fragment() {
                 ListOfFoldersFragmentDirections.actionListOfFoldersFragmentToCreateFolderFragment()
             findNavController().navigate(direction)
         }
+    }
+
+    private fun setOnClickListenerForListOfTasksButton() {
+        binding.clListOfTasks.setOnClickListener {
+            navigateToListOfTasksWithoutFolderFragment()
+        }
+    }
+
+    private fun navigateToListOfTasksWithoutFolderFragment() {
+        val direction =
+            ListOfFoldersFragmentDirections.actionListOfFoldersFragmentToListOfTasksWithoutFolderFragment()
+        findNavController().navigate(direction)
     }
 }

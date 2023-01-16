@@ -22,6 +22,13 @@
             app:destination="@id/createFolderFragment"
             app:enterAnim="@anim/push_up_in"
             app:popExitAnim="@anim/push_down_out"/>
+        <action
+            android:id="@+id/action_listOfFoldersFragment_to_listOfTasksWithoutFolderFragment"
+            app:destination="@id/listOfTasksWithoutFolderFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/listOfTasksFragment"
@@ -100,5 +107,23 @@
         <argument
             android:name="taskNote"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfTasksWithoutFolderFragment"
+        android:name="com.src.todo.presentation.listOfTasksWithoutFolder.ListOfTasksWithoutFolderFragment"
+        android:label="ListOfTasksWithoutFolderFragment" >
+        <action
+            android:id="@+id/action_listOfTasksWithoutFolderFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_listOfTasksWithoutFolderFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment"
+            app:enterAnim="@anim/push_up_in"
+            app:popUpTo="@id/createFolderFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

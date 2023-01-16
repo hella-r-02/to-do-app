@@ -19,7 +19,7 @@ class AddTaskViewModel(
             insertTaskUseCase.execute(
                 name = name,
                 date = _mutableLiveDataDate.value,
-                folderId = folderId,
+                folderId = if (folderId != 0L) folderId else null,
                 note = _mutableLiveDataNote.value
             )
             _mutableLiveDataNote.value = null

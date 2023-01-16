@@ -49,6 +49,7 @@ class TaskFragment : Fragment() {
         showDateDialog()
         setOnClickListenerForRemoveNoteIcon()
         setOnClickListenerForRemoveDateIcon()
+        setOnClickListenerForTrashButton()
     }
 
     private fun parseState(state: State<Task>) {
@@ -190,6 +191,13 @@ class TaskFragment : Fragment() {
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.white_60_per))
                 binging.ivRemoveNote.visibility = View.GONE
             }
+        }
+    }
+
+    private fun setOnClickListenerForTrashButton() {
+        binging.ivTrash.setOnClickListener {
+            viewModel.deleteTask(taskId = task.id)
+            findNavController().popBackStack()
         }
     }
 

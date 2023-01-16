@@ -25,4 +25,10 @@ interface TaskDao {
 
     @Query("delete from tasks where id=:id")
     fun deleteTaskById(id: Long)
+
+    @Query("select * from tasks where tasks.folder_id is null")
+    fun getAllTasksWithoutFolder(): Flow<List<TaskEntity>>
+
+    @Query("select count(tasks.id) as count from tasks where tasks.folder_id is NULL")
+    fun getCountOfTasksWithoutFolder(): Flow<Long>
 }

@@ -9,4 +9,6 @@ interface TaskRepository {
     suspend fun updateTask(task: Task)
     suspend fun insertTask(task: Task)
     suspend fun deleteTask(id: Long)
+    suspend fun getAllTasksWithoutFolder(): Flow<List<Task>>
+    suspend fun getCountOfTasksWithoutFolder(): Flow<Long>
 }

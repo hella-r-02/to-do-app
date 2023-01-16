@@ -28,4 +28,13 @@ class TaskRepositoryImpl(private val localDataSource: LocalDataSource) : TaskRep
     override suspend fun deleteTask(id: Long) = withContext(Dispatchers.IO) {
         localDataSource.deleteTask(id)
     }
+
+    override suspend fun getAllTasksWithoutFolder(): Flow<List<Task>> =
+        withContext(Dispatchers.IO) {
+            return@withContext localDataSource.getAllTasksWithoutFolder()
+        }
+
+    override suspend fun getCountOfTasksWithoutFolder(): Flow<Long> = withContext(Dispatchers.IO) {
+        return@withContext localDataSource.getCountOfTasksWithoutFolder()
+    }
 }

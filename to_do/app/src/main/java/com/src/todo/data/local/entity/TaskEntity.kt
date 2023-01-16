@@ -33,7 +33,7 @@ data class TaskEntity(
     val note: String?,
 
     @ColumnInfo(name = "folder_id")
-    val folderId: Long,
+    val folderId: Long?,
 ) {
     companion object {
         fun fromTaskModel(task: Task) = TaskEntity(

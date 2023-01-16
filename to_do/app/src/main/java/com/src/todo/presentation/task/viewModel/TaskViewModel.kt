@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.src.todo.domain.model.Task
+import com.src.todo.domain.usecase.task.DeleteTaskUseCase
 import com.src.todo.domain.usecase.task.GetTaskByIdUseCase
 import com.src.todo.domain.usecase.task.UpdateTaskUseCase
 import com.src.todo.presentation.utils.State
@@ -11,7 +12,8 @@ import kotlinx.coroutines.launch
 
 class TaskViewModel(
     private val getTaskByIdUseCase: GetTaskByIdUseCase,
-    private val updateTaskUseCase: UpdateTaskUseCase
+    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
     private val _mutableLiveDataLoadTaskState = MutableLiveData<State<Task>>(State.EmptyState())
     val liveDataLoadTaskState get() = _mutableLiveDataLoadTaskState
@@ -39,6 +41,12 @@ class TaskViewModel(
                 updateTaskUseCase.execute(task)
                 _mutableLiveDataLoadTaskState.value = State.SuccessState(task)
             }
+        }
+    }
+
+    fun deleteTask(taskId: Long) {
+        viewModelScope.launch {
+            deleteTaskUseCase.execute(taskId)
         }
     }
 }

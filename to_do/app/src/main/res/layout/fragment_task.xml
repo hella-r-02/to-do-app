@@ -166,6 +166,7 @@
         app:tint="@color/white_60_per" />
 
     <ImageView
+        android:id="@+id/iv_trash"
         android:layout_width="@dimen/space_5x"
         android:layout_height="@dimen/space_5x"
         android:layout_marginBottom="@dimen/space_5x"
